@@ -1,0 +1,31 @@
+﻿@model IList<Post>
+
+<h1>Home Page</h1>
+
+<h2>Posts</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <th>@p.Id</th>
+                <th>@p.Title</th>
+                <th>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Post" asp-route-Id="@p.Id">Go to post</a>
+                </th>
+                <th>
+                    <a class="btn btn-info" asp-controller="AdminPanel" asp-action="Edit" asp-route-Id="@p.Id">Edit</a>
+                    <a class="btn btn-danger" asp-controller="AdminPanel" asp-action="Delete" asp-route-Id="@p.Id">Delete</a>
+                </th>
+            </tr>
+        }
+
+    </tbody>
+</table>

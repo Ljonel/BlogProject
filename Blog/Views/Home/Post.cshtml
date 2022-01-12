@@ -1,0 +1,13 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Post Page";
+}
+
+<div>
+    <h3>@Model.Title</h3>
+    <h4>@Model.Body</h4>
+    <p>@Model.Created</p>
+    <p>Created by userID: <span>@Model.ApplicationUserId - @Model.ApplicationUserName</span></p>
+   
+
+</div>

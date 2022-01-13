@@ -15,16 +15,17 @@
     <tbody>
         @foreach (var p in Model)
         {
-        <tr>
+            <tr>
                 <th>@p.Id</th>
                 <th>@p.Title</th>
                 <th>
-            <a class="btn btn-info" asp-controller="Home" asp-action="Post" asp-route-Id="@p.Id">Go to post</a>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Post" asp-route-Id="@p.Id">Go to post</a>
                 </th>
                 <th>
-        </th>
-        </tr>
+                </th>
+            </tr>
         }
 
     </tbody>
 </table>
+    <img src="~/content/static/duck.jpg"  width="300" height="300"/>

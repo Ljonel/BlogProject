@@ -1,4 +1,5 @@
 ﻿@model Post
+
 @{
     ViewData["Title"] = "Post Page";
 }
@@ -8,6 +9,10 @@
     <h4>@Model.Body</h4>
     <p>@Model.Created</p>
     <p>Created by userID: <span>@Model.ApplicationUserId - @Model.ApplicationUserName</span></p>
-   
+   @if (!String.IsNullOrEmpty(Model.Image))
+   {
+       var imagePath = $"/Image/{Model.Image}";
+       <img src="@imagePath"/>
+   }
 
 </div>

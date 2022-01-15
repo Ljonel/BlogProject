@@ -14,6 +14,8 @@ using Blog.Data.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Blog.Data.FileManager;
+
 namespace Blog
 {
     public class Startup
@@ -48,6 +50,8 @@ namespace Blog
                 options.LoginPath = "/Authentication/Login";
             });
             services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IFileManager, FileManager>();
+
 
             services.AddControllersWithViews();
         }

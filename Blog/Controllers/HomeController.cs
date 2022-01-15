@@ -10,15 +10,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Blog.Data.FileManager;
+using Blog.ViewModels;
 
 namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
         private IRepository _repository;
-        public HomeController(IRepository repository)
+        private IFileManager _fileManager;
+
+        public HomeController(IRepository repository, IFileManager fileManager)
         {
             _repository = repository;
+            _fileManager = fileManager;
         }
         public IActionResult Index()
         {
@@ -35,6 +40,25 @@ namespace Blog.Controllers
         {
             if (id == null)
             {
+                return View(new PostViewModel());
+            }
+            else
+            {
+                var post = _repository.GetPost((int)id); //this is short version of converting to int
+                return View(new PostViewModel
+                {
+                    Id = post.Id,
+                    Title = post.Title,
+                    Body = post.Body,
+                    ApplicationUserName = post.ApplicationUserName,
+                });
+
+            }
+
+
+
+           /* if (id == null)
+            {
                 return View(new Post());
             }
             else
@@ -42,13 +66,43 @@ namespace Blog.Controllers
                 var post = _repository.GetPost((int)id); //this is short version of converting to int
                 return View(post);
 
-            }
+            }*/
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Post post)
+        public async Task<IActionResult> Edit(PostViewModel postViewModel)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+            var userName = User.Identity.Name;
+            var post = new Post
+            {
+                Id = postViewModel.Id,
+                Title = postViewModel.Title,
+                Body = postViewModel.Body,
+                Image = await _fileManager.SaveImage(postViewModel.Image),
+                ApplicationUserName = userName,
+                ApplicationUserId = userId,
+            };
 
+            if (post.Id > 0)
+            {
+                _repository.UpdatePost(post);           //jesli edytujemy id zawsze jest > 0
+            }
+            else
+            {
+                postViewModel.ApplicationUserId = post.ApplicationUserId;
+                postViewModel.ApplicationUserName = post.ApplicationUserName;
+                _repository.AddPost(post);      //jesli klikniete bedzie "Create Post" ukryte id=0,
+            }
+            if (await _repository.SaveChanges())
+                return RedirectToAction("Index", "Home");
+            else
+                return View(post);
+
+
+
+
+            /*
             if (post.Id > 0)
             {
                 _repository.UpdatePost(post);           //jesli edytujemy id zawsze jest > 0
@@ -65,8 +119,16 @@ namespace Blog.Controllers
             if (await _repository.SaveChanges())
                 return RedirectToAction("Index", "Home");
             else
-                return View(post);
+                return View(post);*/
         }
 
+
+
+        [HttpGet("/Image/{image}")]
+        public IActionResult Image(string image)
+        {
+            var mime = image.Substring(image.LastIndexOf('.') + 1);
+            return new FileStreamResult(_fileManager.ImageStream(image), $"image/{mime}");
+        }
     }
 }

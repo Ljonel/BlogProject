@@ -40,6 +40,7 @@ namespace Blog.Data.Repository
             return new IndexPageModel
             {
                 PageNumber = pageNumber,
+                
                 PageCount = (int)Math.Ceiling(postsCount * 1.0 / pageSize),
                 NextPage = postsCount > skip + pageSize,
                 Posts = _context.Posts

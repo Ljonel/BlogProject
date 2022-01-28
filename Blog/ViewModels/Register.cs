@@ -11,6 +11,7 @@ namespace Blog.ViewModels
 
         [Required]
         [DataType(DataType.Text)]
+        [MinLength(3, ErrorMessage = "The UserName must be more than 3!")]
         public string UserName { get; set; }
 
         [Required]
@@ -19,6 +20,8 @@ namespace Blog.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
+        [StringLength(6, ErrorMessage = "Password must be more than 6 chars")]
+        [RegularExpression("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]
         public string Password { get; set; }
 
         [Required]

@@ -5,22 +5,26 @@
 @{
 }
 
-<div>
+<div class="user-edit-container">
         @* <-------- ENCTYPE MUSI BYC INACZEJ NIE DZIALA !!!!!!!!!*@
-    <form asp-controller="Home" asp-action="Edit" method="post" enctype="multipart/form-data">
-        <input asp-for="Id" type="hidden" />
-        <div>
-            <label> Title </label>
-            <input asp-for="Title" />
+    <form asp-controller="Home" asp-action="Edit" method="post" enctype="multipart/form-data" class="user-edit-form">
+        <div class="form-center">
+            <input asp-for="Id" type="hidden" />
+            <div>
+                <input asp-for="Title" placeholder="Title" />
+                <span asp-validation-for="Title" class="error-validation"></span>
+
+            </div>
+            <div>
+                <input asp-for="Body" placeholder="Body" />
+                <span asp-validation-for="Body" class="error-validation"></span>
+
+            </div>
+            <div>
+                <input asp-for="Image" class="image-button"/>
+            </div>
+            <input type="submit" value="submit" class="admin-edit-button" />
         </div>
-        <div>
-            <label> Body </label>
-            <input asp-for="Body" />
-        </div>
-        <div>
-            <label> Image </label>
-            <input asp-for="Image" />
-        </div>
-        <input type="submit" value="submit" />
     </form>
 </div>
+

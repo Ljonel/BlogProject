@@ -49,11 +49,11 @@ namespace Blog.Controllers
 
                 return View(new PostViewModel
                 {
+                    CurrentImage = post.Image,//pobieram dane z posta ktory zostal klikniety
+                    Created = post.Created,
                     Id = post.Id,
                     Title = post.Title,
                     Body = post.Body,
-                    CurrentImage = post.Image,//pobieram dane z posta ktory zostal klikniety
-                    Created = post.Created,
                     ApplicationUserName = post.ApplicationUserName,
                     ApplicationUserId = post.ApplicationUserId,
 
@@ -64,6 +64,16 @@ namespace Blog.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel postViewModel)
         {
+            if (postViewModel.Title == null)
+            {
+                ModelState.AddModelError(nameof(postViewModel.Title), "Title not found or null");
+                return View();
+            }
+            if (postViewModel.Body == null)
+            {
+                ModelState.AddModelError(nameof(postViewModel.Body), "Body not found or null");
+                return View();
+            }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
             var userName = User.Identity.Name;
 

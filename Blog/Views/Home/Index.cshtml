@@ -1,8 +1,33 @@
 ﻿@model IList<Post>
 
-<h1>Home Page</h1>
-
+<div class="home-banner">
+    <h1>C# - Blog Site</h1>
+</div>
 <h2>Posts</h2>
+<div class="home-container">
+    @foreach (var p in Model)
+    {
+        var img_path = $"/Image/{p.Image}";
+    <div class="post-wrapper">
+        <a asp-controller="Home" asp-action="Post" asp-route-Id="@p.Id">
+            <img src='@img_path' />
+        </a>
+        <a class="post-link" asp-controller="Home" asp-action="Post" asp-route-Id="@p.Id">
+            <h3>@p.Title</h3>
+            <div class="post-content">
+                <p>@p.Created.ToString().Substring(11)</p>
+                <p>@p.ApplicationUserName</p>
+            </div>
+        </a>
+    </div>
+    }
+</div>
+
+
+
+
+
+@*
 <table class="table">
     <thead>
         <tr>
@@ -28,4 +53,5 @@
 
     </tbody>
 </table>
+    *@
 @* <img src="~/content/static/duck.jpg"  width="300" height="300"/>*@

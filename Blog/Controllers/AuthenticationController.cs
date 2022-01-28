@@ -28,12 +28,19 @@ namespace Blog.Controllers
         public async Task<IActionResult> Login(Login viewLogin)
         {
             //only admin can go to see the Admin Panel
+            if(viewLogin.UserName == null)
+            {
+                ModelState.AddModelError(nameof(viewLogin.UserName), "Username not found or null");
+                return View(viewLogin);
+            }
             var result = await _signInManager.PasswordSignInAsync(viewLogin.UserName, viewLogin.Password, false, false);
             if(!result.Succeeded)
             {
                 return View(viewLogin);
 
             }
+
+           
 
             var user = await _userManager.FindByNameAsync(viewLogin.UserName);
             var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");

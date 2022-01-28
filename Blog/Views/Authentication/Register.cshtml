@@ -4,29 +4,27 @@
 *@
 @{
 }
+<div class="admin-edit-container">
+    <form asp-controller="Authentication" asp-action="Register" method="post" class="admin-edit-form">
+        <div class="form-center">
+            <div>
+                <input asp-for="UserName" placeholder="Username" />
+                <span asp-validation-for="UserName" class="error-validation"></span>
+            </div>
+            <div>
+                <input asp-for="Email" placeholder="Email" />
+                <span asp-validation-for="Email" class="error-validation"></span>
+            </div>
+            <div>
+                <input asp-for="Password" placeholder="Password" />
+                <span asp-validation-for="Password" class="error-validation"></span>
+            </div>
+            <div>
+                <input asp-for="ConfirmPassword" placeholder="Confirm password" />
+                <span asp-validation-for="ConfirmPassword" class="error-validation"></span>
 
-<form asp-controller="Authentication" asp-action="Register" method="post">
-    <div>
-        <label>UserName</label>
-        <input asp-for="UserName" />
-        <span asp-validation-for="UserName"></span>
-    </div>
-    <div>
-        <label>Email</label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label>Password</label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label>Confirm Password</label>
-        <input asp-for="ConfirmPassword" />
-        <span asp-validation-for="ConfirmPassword"></span>
-
-    </div>
-
-    <input type="submit" value="Sign Up" />
-</form>
+            </div>
+            <input type="submit" value="Sign Up" class="admin-edit-button" />
+        </div>
+    </form>
+</div>

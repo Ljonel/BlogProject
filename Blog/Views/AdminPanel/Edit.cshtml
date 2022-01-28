@@ -4,27 +4,30 @@
 @model PostViewModel
 @{
 }
+<div class="admin-edit-container">
+    <form asp-controller="AdminPanel" asp-action="Edit" method="post" enctype="multipart/form-data" class="admin-edit-form">
 
-<div>
-    <form asp-controller="AdminPanel" asp-action="Edit" method="post" enctype="multipart/form-data">
         @* <-------- ENCTYPE MUSI BYC INACZEJ NIE DZIALA !!!!!!!!!*@
-        <input asp-for="Id" type="hidden" />
-        <input asp-for="CurrentImage" type="hidden" />
-        <input asp-for="ApplicationUserName" type="hidden" />
-        <input asp-for="Created" type="hidden" />
-        <div>
-            <label> Title </label>
-            <input asp-for="Title" />
+        <div class="form-center">
+            <input asp-for="Id" type="hidden" />
+            <input asp-for="CurrentImage" type="hidden" />
+            <input asp-for="ApplicationUserName" type="hidden" />
+            <input asp-for="Created" type="hidden" />
+            <div>
+                <input asp-for="Title" placeholder="Title" />
+                <span asp-validation-for="Title" class="error-validation"></span>
+
+            </div>
+            <div>
+                <input asp-for="Body" placeholder="Body" />
+                <span asp-validation-for="Title" class="error-validation"></span>
+
+            </div>
+            <div>
+                <input asp-for="Image" class="image-button" />
+                <input asp-for="ApplicationUserId" type="hidden" />
+            </div>
+            <input type="submit" value="submit" class="admin-edit-button"/>
         </div>
-        <div>
-            <label> Body </label>
-            <input asp-for="Body" />
-        </div>
-        <div>
-            <label> Image </label>
-            <input asp-for="Image" />
-        <input asp-for="ApplicationUserId" type="hidden" />
-        </div>
-        <input type="submit" value="submit" />
     </form>
 </div>

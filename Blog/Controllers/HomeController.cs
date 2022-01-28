@@ -25,9 +25,12 @@ namespace Blog.Controllers
             _repository = repository;
             _fileManager = fileManager;
         }
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber)
         {
-            var posts = _repository.GetAllPosts();
+            if(pageNumber < 1)
+                return RedirectToAction("Index", new { pageNumber = 1});
+
+            var posts = _repository.GetAllPosts(pageNumber);
             return View(posts);
         }
         public IActionResult Post(int id)
@@ -72,6 +75,16 @@ namespace Blog.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(PostViewModel postViewModel)
         {
+            if (postViewModel.Title == null )
+            {
+                ModelState.AddModelError(nameof(postViewModel.Title), "Title not found or null");
+                return View();
+            }
+            if(postViewModel.Body == null)
+            {
+                ModelState.AddModelError(nameof(postViewModel.Body), "Body not found or null");
+                return View();
+            }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
             var userName = User.Identity.Name;
             var post = new Post

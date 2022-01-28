@@ -4,15 +4,28 @@
     ViewData["Title"] = "Post Page";
 }
 
-<div>
-    <h3>@Model.Title</h3>
-    <h4>@Model.Body</h4>
-    <p>@Model.Created</p>
-    <p>Created by userID: <span>@Model.ApplicationUserId - @Model.ApplicationUserName</span></p>
-   @if (!String.IsNullOrEmpty(Model.Image))
-   {
-       var imagePath = $"/Image/{Model.Image}";
-       <img src="@imagePath"/>
-   }
+<div class="post-banner">
+    @if (!String.IsNullOrEmpty(Model.Image))
+    { 
+        var img_path = $"/Image/{Model.Image}"; 
+        <img src='@img_path' />
+    }
+    <h1>@Model.Title</h1>
+</div>
 
+
+<div class="post-container">
+    <div class="post-body">
+        <h4>@Model.Body</h4>
+    </div>
+    <div class="post-data">
+        <p>@Model.Created</p>
+        <p>Created by <span>@Model.ApplicationUserName</span></p>
+        @*<p>Created by userID: <span>@Model.ApplicationUserId - @Model.ApplicationUserName</span></p>*@
+        @*if (!String.IsNullOrEmpty(Model.Image))
+            {
+                var imagePath = $"/Image/{Model.Image}";
+                <img src="@imagePath"/>
+            }*@
+    </div>
 </div>

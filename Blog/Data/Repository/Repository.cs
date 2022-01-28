@@ -17,10 +17,20 @@ namespace Blog.Data.Repository
         {
             _context.Posts.Add(post);
         }
-
         public List<Post> GetAllPosts()
         {
             return _context.Posts.ToList();
+        }
+        public List<Post> GetAllPosts(int pageNumber)
+        {
+            //Pagination
+            int pageSize = 5;
+            int pageCount = _context.Posts.Count() / pageSize;
+
+            return _context.Posts
+                .Skip(pageSize * (pageNumber-1))
+                .Take(pageSize)
+                .ToList();
         }
 
         public Post GetPost(int id)

@@ -25,13 +25,16 @@ namespace Blog.Controllers
             _repository = repository;
             _fileManager = fileManager;
         }
-        public IActionResult Index(int pageNumber)
+        public IActionResult Index(int pageNumber, string search)
         {
             if(pageNumber < 1)
                 return RedirectToAction("Index", new { pageNumber = 1});
 
-            var posts = _repository.GetAllPosts(pageNumber);
-            return View(posts);
+
+            var vm = _repository.GetAllPosts(pageNumber, search);
+
+            /*var posts = _repository.GetAllPosts(pageNumber);*/
+            return View(vm);
         }
         public IActionResult Post(int id)
         {

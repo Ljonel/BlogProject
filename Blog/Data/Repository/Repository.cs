@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Models;
+using Blog.ViewModels;
 
 namespace Blog.Data.Repository
 {
@@ -21,16 +22,31 @@ namespace Blog.Data.Repository
         {
             return _context.Posts.ToList();
         }
-        public List<Post> GetAllPosts(int pageNumber)
+        public IndexPageModel GetAllPosts(int pageNumber, string search)
         {
             //Pagination
-            int pageSize = 5;
-            int pageCount = _context.Posts.Count() / pageSize;
+            int pageSize = 3;
+            int skip = pageSize * (pageNumber - 1);
+            int postsCount = _context.Posts.Count();
+            /* int cap = skip + pageSize;*/
 
-            return _context.Posts
-                .Skip(pageSize * (pageNumber-1))
+            var query = _context.Posts.AsQueryable();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                query = query.Where(x => x.Title.Contains(search) || x.Body.Contains(search));
+            }
+
+            return new IndexPageModel
+            {
+                PageNumber = pageNumber,
+                PageCount = (int)Math.Ceiling(postsCount * 1.0 / pageSize),
+                NextPage = postsCount > skip + pageSize,
+                Posts = _context.Posts
+                .Skip(skip)
                 .Take(pageSize)
-                .ToList();
+                .ToList()
+            };
         }
 
         public Post GetPost(int id)

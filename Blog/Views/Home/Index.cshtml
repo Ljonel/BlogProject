@@ -1,11 +1,18 @@
-﻿@model IList<Post>
+﻿@*model IList<Post>*@
+@model IndexPageModel 
+
+
 
 <div class="home-banner">
     <h1>C# - Blog Site</h1>
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <input type="hidden" name="pageNumber" value="@Model.PageNumber"/>
+        <input type="text" name="search" class="search" placeholder="Search"/>
+    </form>
 </div>
 <h2>Posts</h2>
 <div class="home-container">
-    @foreach (var p in Model)
+    @foreach (var p in Model.Posts)
     {
         var img_path = $"/Image/{p.Image}";
     <div class="post-wrapper">
@@ -21,9 +28,28 @@
         </a>
     </div>
     }
+
+
 </div>
 
+<div class="pagination">
+    @if(Model.PageNumber > 1)
+    {
+        <a asp-action="Index" asp-controller="Home" asp-route-pageNumber="@(Model.PageNumber - 1)" class="pagination-item">Previous Page</a>
+    }
 
+    @for(int i= 1; i<= Model.PageCount; i++)
+    {
+        <a asp-action="Index"  asp-controller="Home" asp-route-pageNumber="@i" class="pagination-item">@i</a>
+    }
+
+    @if (Model.NextPage)
+    {
+
+    <a asp-action="Index" asp-controller="Home" asp-route-pageNumber="@(Model.PageNumber + 1)" class="pagination-item">Next Page</a>
+    }
+
+</div>
 
 
 

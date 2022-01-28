@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Models;
+using Blog.ViewModels;
 
 namespace Blog.Data.Repository
 {
@@ -10,7 +11,7 @@ namespace Blog.Data.Repository
     {
         Post GetPost(int id);
         List<Post> GetAllPosts();
-        List<Post> GetAllPosts(int pageNumber);
+        IndexPageModel GetAllPosts(int pageNumber, string search);
         void AddPost(Post post);
         void RemovePost(int id);
         void UpdatePost(Post post);

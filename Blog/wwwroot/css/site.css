@@ -237,9 +237,16 @@ html, body {
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
+}
+.search{
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
 }
 a{
     text-decoration: none;
@@ -248,12 +255,12 @@ a{
 a:hover{
     text-decoration: none;
 }
-.home-container{
+.home-container {
     display: flex;
     width: 100%;
     height: 100%;
     flex-wrap: wrap;
-    padding-bottom: 200px;
+    /*padding-bottom: 200px;*/
     justify-content: center;
 }
 .post-wrapper {
@@ -308,7 +315,25 @@ a:hover{
     .error-validation{
         color: red;
     }
-
+    .pagination{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 100px;
+    }
+    .pagination-item{
+        min-width: 30px;
+        height: 30px;
+        background-color: lightblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        margin: 4px;
+        text-decoration: none;
+        color: black;
+        border: 1px solid black;
+    }
 
 /*POST ======================================*/
 .post-banner{
@@ -354,3 +379,4 @@ a:hover{
 .post-data > p {
     margin: 10px;
 }
+

@@ -18,6 +18,7 @@ Po uruchomieniu tych komend w np. Menadżerze MSSQL powinna utworzyć się baza 
 Do dyspozycji mamy defaultowo utworzone konto **Administratora**
 Jeśli konto **Usera** nie utworzyło się automatycznie należy skorzystać z opcji **Rejestracji**
 
-|                 | Admin         |     User      |
+|               | Admin         |     User      |
+| ------------- | ------------- | ------------- |
 | Login           |     Admin     | Damian      | 
 |  Hasło          | password      | @Damian123  |

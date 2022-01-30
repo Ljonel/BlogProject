@@ -3,7 +3,8 @@ ASP.NET Application
 
 Aby zapewnić poprawność działania aplikacji, w pierwszym kroku należy zmienić **ConnectionString** w pliku appsettings.json
 * DATA SOURCE={Nazwa maszyny};Integrated Security=true;DATABASE={Nazwa bazy};Trusted_Connection=True;MultipleActiveResultSets=True
-Na przykład
+</br>
+Na przykład</br>
 * "Server=(localdb)\\MSSQLLocalDB; Database=MyBlog; Trusted_connection=true; MultipleActiveResultSets=true"
 
 ---

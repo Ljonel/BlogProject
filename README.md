@@ -10,7 +10,10 @@ Na przykład
 
 W kolejnym kroku należy utworzyć bazę danych za pomocą komend:
 * dotnet ef migrations add InitialCreate
-* dotnet ef database update
+* dotnet ef database update 
+
+</br>
+
 Po uruchomieniu tych komend w np. Menadżerze MSSQL powinna utworzyć się baza danych
 
 ---
